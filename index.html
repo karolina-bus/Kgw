@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KGW w Księginicach — ludzie, pomysły, kompetencje i współpraca dla mieszkańców.">
+  <title>KGW w Księginicach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&family=Parisienne&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero" id="start">
+    <div class="hero__overlay"></div>
+
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <a class="logo" href="#start" aria-label="Strona główna KGW">
+          <img src="assets/logo-kgw.png" alt="Logo KGW w Księginicach">
+          <span>KGW w Księginicach</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Otwórz menu">
+          ☰
+        </button>
+        <nav id="main-menu" class="main-menu" aria-label="Menu główne">
+          <a href="#o-nas">O nas</a>
+          <a href="#kompetencje-katalog">Nasze kompetencje</a>
+          <a href="#dla-mieszkancow">Dla mieszkańców</a>
+          <a href="#harmonogram">Harmonogram działań</a>
+          <a href="#osiagniecia">Nasze osiągnięcia</a>
+          <a href="#dolacz">Dołącz do nas</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container hero__content">
+      <p class="hero__kicker">KOŁO GOSPODYŃ WIEJSKICH W KSIĘGINICACH</p>
+      <h1 class="hero__title">
+        <span class="hero__title-line">Księginice.</span>
+        <span class="hero__title-line hero__title-line--nowrap">Ludzie. Pomysły. Razem.</span>
+      </h1>
+      <p class="hero__description">
+        Tworzymy miejsce, w którym każdy może coś wnieść — swój czas, talent, doświadczenie,
+        pomysł albo po prostu dobrą energię.
+      </p>
+      <div class="hero__actions">
+        <a class="btn hero-btn-primary" href="#o-nas">Poznaj nas</a>
+        <a class="btn hero-btn-secondary" href="#dolacz">Dołącz do nas</a>
+      </div>
+      <p class="hero__bottom-note">Ludzie • Kompetencje • Pomysły • Współpraca</p>
+      <div class="quick-mobile" aria-label="Szybkie skróty mobilne">
+        <a class="btn btn--light" href="#o-nas">Poznaj nas</a>
+        <button class="btn btn--help" id="help-open-mobile" type="button">Szukam pomocy</button>
+        <a class="btn btn--light" href="#harmonogram">Harmonogram działań</a>
+        <a class="btn btn--solid" href="#dolacz">Dołącz</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="o-nas" class="panel split">
+      <article>
+        <h2>Jesteśmy stąd. I działamy razem.</h2>
+        <p>
+          KGW w Księginicach to nie tylko wspólne spotkania i wydarzenia.
+        </p>
+        <p>
+          To przede wszystkim ludzie — ich doświadczenie, pasje, umiejętności, pomysły
+          i gotowość do pomagania innym.
+        </p>
+        <p>
+          Chcemy tworzyć miejsce, w którym mieszkańcy mogą się poznawać, współpracować,
+          rozwijać swoje pomysły i po prostu dobrze ze sobą być.
+        </p>
+        <p>
+          Bo wierzymy, że silna społeczność zaczyna się od relacji.
+        </p>
+        <a class="btn btn--solid" href="#kompetencje-katalog">Poznaj nas bliżej →</a>
+      </article>
+      <aside class="image-block" aria-label="Zdjęcie członkiń KGW podczas wspólnego działania"></aside>
+    </section>
+    
+    <section id="wartosci" class="panel">
+      <h2>W co wierzymy?</h2>
+      <p>
+        Chcemy, żeby KGW było miejscem, w którym można być sobą, powiedzieć swoje zdanie,
+        poprosić o pomoc i wspólnie świętować sukces.
+      </p>
+      <div class="grid">
+        <article class="card split-card"><h3><span class="ms">favorite</span>Relacje</h3><p>Człowiek jest ważniejszy niż zadanie.</p></article>
+        <article class="card split-card"><h3><span class="ms">handshake</span>Współpraca</h3><p>Nie musimy wszystkiego robić sami.</p></article>
+        <article class="card split-card"><h3><span class="ms">eco</span>Otwartość</h3><p>Jesteśmy różni — i właśnie dlatego możemy się od siebie uczyć.</p></article>
+        <article class="card split-card"><h3><span class="ms">emoji_objects</span>Sprawczość</h3><p>Pomysł ma wartość wtedy, kiedy próbujemy go zrealizować.</p></article>
+        <article class="card split-card"><h3><span class="ms">sentiment_satisfied</span>Radość</h3><p>Chcemy działać i dobrze się razem bawić.</p></article>
+        <article class="card split-card"><h3><span class="ms">home</span>Lokalność</h3><p>Księginice są naszym miejscem i chcemy mieć wpływ na to, jak się tutaj żyje.</p></article>
+      </div>
+    </section>
+
+    <!-- <section id="kontrakt" class="panel">
+      <h2>Nasz kontrakt grupowy</h2>
+      <p>8 zasad, które pomagają nam dobrze ze sobą pracować.</p>
+      <div class="contract-grid">
+        <article class="card contract-item"><span>01</span><h3>Poufność i dyskrecja</h3><p>To, czym dzielimy się w grupie, traktujemy z odpowiedzialnością.</p></article>
+        <article class="card contract-item"><span>02</span><h3>Słucham, aby zrozumieć</h3><p>Nie tylko czekam na swoją kolej, żeby mówić. Naprawdę słucham.</p></article>
+        <article class="card contract-item"><span>03</span><h3>Akceptuję różnorodność</h3><p>Możemy mieć różne zdania, doświadczenia i sposoby działania.</p></article>
+        <article class="card contract-item"><span>04</span><h3>Jestem sobą</h3><p>Nie muszę udawać kogoś, kim nie jestem.</p></article>
+        <article class="card contract-item"><span>05</span><h3>Daję i przyjmuję informację zwrotną</h3><p>Mówimy sobie rzeczy ważne — bezpośrednio, szczerze i z szacunkiem.</p></article>
+        <article class="card contract-item"><span>06</span><h3>Kultura wdzięczności</h3><p>Zauważamy wysiłek innych i potrafimy powiedzieć „dziękuję”.</p></article>
+        <article class="card contract-item"><span>07</span><h3>Celebrujemy sukcesy</h3><p>Nawet małe zwycięstwa są warte świętowania.</p></article>
+        <article class="card contract-item"><span>08</span><h3>Pomagamy sobie wzajemnie</h3><p>Nie zostawiamy człowieka samego z problemem.</p></article>
+      </div>
+    </section> -->
+
+    <!-- <section id="co-nas-laczy" class="panel">
+      <h2>Co nas łączy?</h2>
+      <div class="value-bubbles">
+        <article class="bubble card">
+          <h3>🤝 Ludzie</h3>
+          <p>Poznajemy się, słuchamy i budujemy relacje.</p>
+        </article>
+        <article class="bubble card">
+          <h3>💡 Pomysły</h3>
+          <p>Nie czekamy, aż ktoś zrobi coś za nas. Mamy pomysły i chcemy je realizować.</p>
+        </article>
+        <article class="bubble card">
+          <h3>🌱 Kompetencje</h3>
+          <p>Każdy z nas ma coś, czym może podzielić się z innymi.</p>
+        </article>
+        <article class="bubble card">
+          <h3>❤️ Wspólnota</h3>
+          <p>Pomagamy sobie i tworzymy miejsce, w którym chce się być.</p>
+        </article>
+      </div>
+    </section> -->
+
+    <!-- <section id="kompetencje-intro" class="panel panel--accent">
+      <h2>Każdy ma swoją supermoc.</h2>
+      <p>
+        Jedni potrafią świetnie organizować wydarzenia. Inni znają się na ogrodzie, gotowaniu,
+        dzieciach, fotografii czy rękodziele.
+      </p>
+      <p>
+        Są też tacy, którzy potrafią połączyć ludzi i sprawić, że coś zaczyna się dziać.
+      </p>
+      <p>
+        Zebraliśmy nasze kompetencje, pasje i doświadczenia, żeby łatwiej było nam się wzajemnie wspierać.
+      </p>
+      <a class="btn btn--solid" href="#kompetencje-katalog">Odkryj nasze kompetencje →</a>
+    </section> -->
+
+    <section id="kompetencje-katalog" class="panel">
+      <div class="section-head">
+        <h2>Nasze kompetencje</h2>
+        <button id="help-open" class="btn btn--help" type="button"><span class="ms">volunteer_activism</span>Szukam pomocy</button>
+      </div>
+
+      <label class="search-wrap" for="competency-search">
+        <span>Czego szukasz?</span>
+        <input id="competency-search" type="search" placeholder="Wpisz np. „ogród”, „dzieci”, „gotowanie”, „organizacja”...">
+      </label>
+
+      <div id="competency-filters" class="chip-row" aria-label="Filtry kategorii"></div>
+      <div id="competency-grid" class="grid"></div>
+    </section>
+
+    <section id="dla-mieszkancow" class="panel">
+      <h2><span class="ms">diversity_3</span>Dla mieszkańców</h2>
+      <p class="subtitle">Co możemy zrobić razem?</p>
+      <div class="grid service-grid">
+        <article class="card split-card"><h3><span class="ms">child_care</span>Dzieci</h3><p>Pomysły na aktywności, zabawy, zajęcia i wzajemną pomoc.</p></article>
+        <article class="card split-card"><h3><span class="ms">cake</span>Wypieki</h3><p>Domowe ciasta i wypieki na zamówienie.</p></article>
+        <article class="card split-card"><h3><span class="ms">eco</span>Ogród</h3><p>Wiedza, doświadczenie i pomoc przy roślinach i ogrodzie.</p></article>
+        <article class="card split-card"><h3><span class="ms">restaurant</span>Gotowanie</h3><p>Domowa kuchnia, przepisy i kulinarne inicjatywy.</p></article>
+        <article class="card split-card"><h3><span class="ms">palette</span>Rękodzieło</h3><p>Robótki ręczne, warsztaty i twórcze pomysły.</p></article>
+        <article class="card split-card"><h3><span class="ms">photo_camera</span>Fotografia</h3><p>Zdjęcia podczas wydarzeń i lokalnych inicjatyw.</p></article>
+        <article class="card split-card"><h3><span class="ms">directions_car</span>Transport</h3><p>Pomoc w organizacji transportu w ramach dostępnych możliwości.</p></article>
+        <article class="card split-card"><h3><span class="ms">handshake</span>Pomoc sąsiedzka</h3><p>Bo czasem najważniejsze jest po prostu mieć kogo poprosić o pomoc.</p></article>
+      </div>
+      <p class="notice">
+        Informacja: poszczególne formy pomocy mogą być bezpłatne, odpłatne lub realizowane okazjonalnie — szczegóły ustalane są indywidualnie z osobą oferującą daną pomoc.
+      </p>
+    </section>
+
+
+
+    <section id="harmonogram" class="panel">
+      <h2><span class="ms">calendar_month</span>Harmonogram działań</h2>
+      <div class="calendar-switch">
+        <button class="switch is-active" type="button" data-calendar-view="month">Styczeń | Luty | Marzec...</button>
+        <button class="switch" type="button" data-calendar-view="year"><span class="ms">timeline</span>Harmonogram roczny</button>
+      </div>
+      <div id="calendar-month" class="calendar-view"></div>
+      <div id="calendar-year" class="calendar-view" hidden></div>
+    </section>
+
+    <section id="osiagniecia" class="panel">
+      <h2>Nasze osiągnięcia</h2>
+      <p>To, co już udało nam się zrobić.</p>
+      <div class="stats">
+        <article class="card"><p class="stat__value">15+</p><p class="stat__label">aktywnych osób</p></article>
+        <article class="card"><p class="stat__value">24</p><p class="stat__label">zrealizowane inicjatywy</p></article>
+        <article class="card"><p class="stat__value">480+</p><p class="stat__label">uczestników wydarzeń</p></article>
+        <article class="card"><p class="stat__value">900+</p><p class="stat__label">godzin wspólnego działania</p></article>
+      </div>
+      <div class="timeline" id="achievements-timeline"></div>
+      <p class="note-plain">
+        Nie tylko nagrody są osiągnięciami. Osiągnięciem jest również to, że ktoś dzięki nam poznał sąsiada,
+        znalazł pomoc, nauczył się czegoś nowego albo po prostu dobrze spędził czas.
+      </p>
+    </section>
+
+    <section id="mapa" class="panel">
+      <h2><span class="ms">map</span>Nasza mapa Księginic</h2>
+      <p>
+        Poznajmy się nie tylko z imienia. Zobaczmy, jakie zasoby mamy wokół siebie.
+      </p>
+      <div class="map-wrap card">
+        <div class="map-grid">
+          <article class="map-point"><h3><span class="ms">location_on</span>Ogród społeczny</h3><p>Miejsce związane z lokalną inicjatywą.</p></article>
+          <article class="map-point"><h3><span class="ms">location_on</span>Sala spotkań KGW</h3><p>Tutaj spotykamy się i działamy.</p></article>
+          <article class="map-point"><h3><span class="ms">location_on</span>Przestrzeń wydarzeń</h3><p>Najczęstsza lokalizacja imprez i warsztatów.</p></article>
+          <article class="map-point"><h3><span class="ms">location_on</span>Obszary wsparcia</h3><p>Przybliżone obszary działania i współpracy mieszkańców.</p></article>
+        </div>
+      </div>
+      <p class="notice">
+        Na mapie nie publikujemy dokładnych adresów domów członków KGW.
+        Dane kontaktowe udostępniamy wyłącznie za zgodą konkretnej osoby.
+      </p>
+    </section>
+
+    <section id="dolacz" class="panel panel--join">
+      <h2>Dołącz do nas</h2>
+      <p class="join-lead">
+        Masz pomysł? Masz talent? Masz trochę czasu? Chcesz poznać swoich sąsiadów? Dołącz do nas.
+      </p>
+      <p>
+        Nie musisz umieć wszystkiego. Nie musisz mieć doświadczenia. Nie musisz być „typową osobą z KGW”.
+        Wystarczy, że chcesz być częścią lokalnej społeczności.
+      </p>
+      <button id="join-open" class="btn btn--help" type="button" aria-controls="join-form" aria-expanded="false"><span class="ms">group_add</span>Chcę dołączyć</button>
+    </section>
+
+    <section id="formularz-dolacz" class="panel">
+      <h2>Formularz „Dołącz”</h2>
+      <form id="join-form" class="card form" hidden>
+        <div class="form-grid">
+          <label>Imię i nazwisko<input name="fullname" required></label>
+          <label>E-mail / telefon<input name="contact" required></label>
+        </div>
+        <fieldset>
+          <legend>Co możesz wnieść?</legend>
+          <div class="check-grid" id="join-skills"></div>
+        </fieldset>
+        <label>Co chciałabyś/chciałbyś robić razem z nami?
+          <textarea name="together" rows="4" required></textarea>
+        </label>
+        <label>Co chciałabyś/chciałbyś zmienić lub stworzyć w Księginicach?
+          <textarea name="change" rows="4" required></textarea>
+        </label>
+        <button class="btn btn--solid" type="submit">Wyślij</button>
+        <p id="join-status" class="form-status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="kontakt" class="panel">
+      <h2>Porozmawiajmy.</h2>
+      <p>Masz pytanie? Pomysł? Chcesz do nas dołączyć? Potrzebujesz pomocy? Napisz. Chętnie Cię poznamy.</p>
+      <div class="contact-grid">
+        <article class="card split-card">
+          <p><strong><span class="ms">mail</span>E-mail</strong><br><a href="mailto:kgw@ksieginice.pl">kgw@ksieginice.pl</a></p>
+          <p><strong><span class="ms">call</span>Telefon</strong><br><a href="tel:+48000000000">+48 000 000 000</a></p>
+          <p><strong><span class="ms">share</span>Media społecznościowe</strong><br>Facebook | Instagram</p>
+          <p><strong><span class="ms">location_on</span>Spotykamy się</strong><br>Sala spotkań, Księginice</p>
+        </article>
+        <form id="contact-form" class="card form">
+          <label>Imię i nazwisko<input name="name" required></label>
+          <label>E-mail lub telefon<input name="contact" required></label>
+          <label>Wiadomość<textarea name="message" rows="5" required></textarea></label>
+          <button class="btn btn--solid" type="submit">Wyślij wiadomość</button>
+          <p id="contact-status" class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer-brand">
+        <img src="assets/logo-kgw.png" alt="Logo KGW w Księginicach">
+        <div>
+          <p class="footer__logo">KGW w Księginicach</p>
+          <p>Razem tworzymy dobre miejsce do życia.</p>
+        </div>
+      </div>
+      <nav class="footer__links" aria-label="Linki stopki">
+        <a href="#o-nas">O nas</a>
+        <a href="#kompetencje-katalog">Kompetencje</a>
+        <a href="#dla-mieszkancow">Dla mieszkańców</a>
+        <a href="#harmonogram">Harmonogram działań</a>
+        <a href="#dolacz">Dołącz</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year"></span> KGW w Księginicach</p>
+      <a href="#" aria-label="Polityka prywatności">Polityka prywatności</a>
+    </div>
+  </footer>
+
+  <dialog id="profile-modal" class="modal">
+    <article class="modal__box">
+      <button id="profile-close" class="modal__close" type="button" aria-label="Zamknij profil">×</button>
+      <div id="profile-content"></div>
+    </article>
+  </dialog>
+
+  <dialog id="help-modal" class="modal">
+    <article class="modal__box">
+      <button id="help-close" class="modal__close" type="button" aria-label="Zamknij formularz">×</button>
+      <h3><span class="ms">volunteer_activism</span>Szukam pomocy</h3>
+      <form id="help-form" class="form form--compact">
+        <fieldset>
+          <legend>Czego potrzebujesz?</legend>
+          <div class="check-grid" id="help-needs"></div>
+        </fieldset>
+        <label>Opis potrzeby<textarea name="needDescription" rows="4" required></textarea></label>
+        <label>Kontakt<input name="contact" required></label>
+        <button class="btn btn--solid" type="submit">Wyślij zapytanie</button>
+        <p id="help-status" class="form-status" aria-live="polite"></p>
+      </form>
+    </article>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
