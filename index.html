@@ -215,19 +215,30 @@
     <section id="mapa" class="panel">
       <h2><span class="ms">map</span>Nasza mapa Księginic</h2>
       <p>
-        Poznajmy się nie tylko z imienia. Zobaczmy, jakie zasoby mamy wokół siebie.
+        Najedź na etykietę punktu, aby przybliżyć mapę i zobaczyć nazwę oraz adres.
       </p>
       <div class="map-wrap card">
-        <div class="map-grid">
-          <article class="map-point"><h3><span class="ms">location_on</span>Ogród społeczny</h3><p>Miejsce związane z lokalną inicjatywą.</p></article>
-          <article class="map-point"><h3><span class="ms">location_on</span>Sala spotkań KGW</h3><p>Tutaj spotykamy się i działamy.</p></article>
-          <article class="map-point"><h3><span class="ms">location_on</span>Przestrzeń wydarzeń</h3><p>Najczęstsza lokalizacja imprez i warsztatów.</p></article>
-          <article class="map-point"><h3><span class="ms">location_on</span>Obszary wsparcia</h3><p>Przybliżone obszary działania i współpracy mieszkańców.</p></article>
+        <form id="map-search-form" class="map-search" role="search">
+          <label for="map-search-input">Szukaj punktu lub ulicy</label>
+          <div class="map-search__controls">
+            <input id="map-search-input" name="mapSearch" type="search" placeholder="Np. świetlica, ul. Kwiatowa" autocomplete="off" list="map-search-suggestions">
+            <datalist id="map-search-suggestions">
+              <option value="Świetlica"></option>
+              <option value="ul. Kwiatowa"></option>
+              <option value="Boisko"></option>
+              <option value="Plac zabaw"></option>
+            </datalist>
+            <button class="btn btn--solid" type="submit">Szukaj</button>
+          </div>
+          <p id="map-search-status" class="map-status" aria-live="polite"></p>
+        </form>
+        <div class="map-layout">
+          <div id="map-point-list" class="map-point-list" aria-label="Lista punktów mapy"></div>
+          <div id="kgw-map" class="kgw-map" aria-label="Interaktywna mapa Księginic"></div>
         </div>
       </div>
       <p class="notice">
-        Na mapie nie publikujemy dokładnych adresów domów członków KGW.
-        Dane kontaktowe udostępniamy wyłącznie za zgodą konkretnej osoby.
+        Obszar mapy: Księginice (55-040), gmina Kobierzyce.
       </p>
     </section>
 

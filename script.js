@@ -303,6 +303,41 @@ const joinSkills = [
   "inne"
 ];
 
+const villageMapPoints = [
+  {
+    id: "swietlica",
+    name: "Świetlica",
+    address: "Świetlica wiejska, Księginice 55-040",
+    lat: 50.99686,
+    lng: 16.98198,
+    zoom: 18
+  },
+  {
+    id: "kwiatowa-miod",
+    name: "Sprzedaż miodu",
+    address: "ul. Kwiatowa, Księginice 55-040",
+    lat: 50.99658,
+    lng: 16.98124,
+    zoom: 18
+  },
+  {
+    id: "boisko",
+    name: "Boisko",
+    address: `50°59'49.2"N 16°58'56.3"E`,
+    lat: 50.997,
+    lng: 16.9823056,
+    zoom: 19
+  },
+  {
+    id: "plac-zabaw",
+    name: "Plac zabaw",
+    address: `50°59'49.9"N 16°58'53.8"E`,
+    lat: 50.9971944,
+    lng: 16.9816111,
+    zoom: 19
+  }
+];
+
 const state = {
   filter: "Wszystkie",
   query: ""
@@ -317,6 +352,13 @@ function select(id) {
 function stripDecorativeIcons(text) {
   if (typeof text !== "string") return text;
   return text.replace(emojiRegex, "").replace(/\s+/g, " ").trim();
+}
+
+function normalizeText(text) {
+  return String(text || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 function renderCheckboxes(container, values, name) {
@@ -694,6 +736,140 @@ function setupSinglePageExperience() {
   panels.forEach((panel) => activeObserver.observe(panel));
 }
 
+function setupVillageMap() {
+  const mapElement = select("kgw-map");
+  const pointList = select("map-point-list");
+  const searchForm = select("map-search-form");
+  const searchInput = select("map-search-input");
+  const searchStatus = select("map-search-status");
+
+  if (!mapElement || !pointList || !searchForm || !(searchInput instanceof HTMLInputElement)) return;
+
+  const defaultCenter = { lat: 50.99695, lng: 16.9819 };
+  const defaultDelta = 0.0048;
+  const points = [...villageMapPoints];
+
+  mapElement.innerHTML = `
+    <iframe
+      id="kgw-osm-frame"
+      class="osm-map__frame"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Mapa OpenStreetMap Księginic"
+    ></iframe>
+    <div id="kgw-osm-hint" class="osm-map__hint" aria-live="polite"></div>
+  `;
+
+  const frame = select("kgw-osm-frame");
+  const hint = select("kgw-osm-hint");
+  if (!(frame instanceof HTMLIFrameElement) || !(hint instanceof HTMLElement)) return;
+
+  const setActiveLabel = (pointId) => {
+    pointList.querySelectorAll(".map-point-label").forEach((node) => {
+      if (!(node instanceof HTMLElement)) return;
+      node.classList.toggle("is-active", node.dataset.pointId === pointId);
+    });
+  };
+
+  const buildEmbedUrl = (lat, lng, delta) => {
+    const left = (lng - delta).toFixed(6);
+    const right = (lng + delta).toFixed(6);
+    const bottom = (lat - delta).toFixed(6);
+    const top = (lat + delta).toFixed(6);
+    const params = new URLSearchParams({
+      bbox: `${left},${bottom},${right},${top}`,
+      layer: "mapnik",
+      marker: `${lat},${lng}`
+    });
+    return `https://www.openstreetmap.org/export/embed.html?${params.toString()}`;
+  };
+
+  const getDeltaByZoom = (zoom) => {
+    if (zoom >= 19) return 0.00125;
+    if (zoom >= 18) return 0.0017;
+    if (zoom >= 17) return 0.0022;
+    return 0.0038;
+  };
+
+  const setDefaultMapView = () => {
+    frame.src = buildEmbedUrl(defaultCenter.lat, defaultCenter.lng, defaultDelta);
+    hint.classList.remove("is-visible");
+    hint.textContent = "";
+  };
+
+  const focusPoint = (point, options) => {
+    const zoomDelta = getDeltaByZoom(options && options.zoom ? point.zoom : 17);
+    frame.src = buildEmbedUrl(point.lat, point.lng, zoomDelta);
+    hint.innerHTML = `<strong>${point.name}</strong><span>${point.address}</span>`;
+    hint.classList.add("is-visible");
+    setActiveLabel(point.id);
+    if (searchStatus && options && options.fromSearch) {
+      searchStatus.textContent = `Znaleziono: ${point.name} — ${point.address}`;
+    }
+  };
+
+  points.forEach((point) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "map-point-label map-point";
+    button.dataset.pointId = point.id;
+    button.innerHTML = `<h3><span class="ms">location_on</span>${point.name}</h3><p>${point.address}</p>`;
+    button.addEventListener("mouseenter", () => focusPoint(point, { zoom: true }));
+    button.addEventListener("focus", () => focusPoint(point, { zoom: true }));
+    button.addEventListener("click", () => focusPoint(point, { zoom: true, fromSearch: true }));
+    pointList.append(button);
+  });
+
+  const searchIndex = [
+    {
+      id: "swietlica",
+      aliases: ["swietlica", "świetlica", "swietlica wiejska", "świetlica wiejska"]
+    },
+    {
+      id: "kwiatowa-miod",
+      aliases: ["ul. kwiatowa", "kwiatowa", "sprzedaz miodu", "sprzedaż miodu", "miod", "miód"]
+    },
+    {
+      id: "boisko",
+      aliases: ["boisko", `50°59'49.2"n 16°58'56.3"e`, "50.997 16.9823056"]
+    },
+    {
+      id: "plac-zabaw",
+      aliases: ["plac zabaw", `50°59'49.9"n 16°58'53.8"e`, "50.9971944 16.9816111"]
+    }
+  ];
+
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const query = searchInput.value.trim();
+    if (!query) {
+      if (searchStatus) searchStatus.textContent = "Wpisz nazwę punktu lub ulicy.";
+      return;
+    }
+
+    const normalizedQuery = normalizeText(query);
+    const localEntry = searchIndex.find((entry) => {
+      return entry.aliases.some((alias) => normalizeText(alias).includes(normalizedQuery))
+        || normalizeText(normalizedQuery).includes(normalizeText(entry.aliases[0]));
+    });
+
+    const localPoint = localEntry ? points.find((point) => point.id === localEntry.id) : null;
+    if (localPoint) {
+      focusPoint(localPoint, { zoom: true, fromSearch: true });
+      return;
+    }
+
+    setDefaultMapView();
+    setActiveLabel("");
+    if (searchStatus) searchStatus.textContent = "Nie znaleziono. Wpisz: świetlica, ul. Kwiatowa, boisko lub plac zabaw.";
+  });
+
+  setDefaultMapView();
+  if (searchStatus) {
+    searchStatus.textContent = "Wpisz punkt albo ulicę i kliknij „Szukaj”.";
+  }
+}
+
 function setDynamicValues() {
   const year = select("year");
   if (year) year.textContent = String(new Date().getFullYear());
@@ -724,6 +900,7 @@ function init() {
   setupMobileMenu();
   setupSearch();
   setupSinglePageExperience();
+  setupVillageMap();
   setDynamicValues();
   setStats();
 }
