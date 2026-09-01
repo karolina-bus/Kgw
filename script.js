@@ -343,6 +343,9 @@ const state = {
   query: ""
 };
 
+const contactEmail = "kgw.ksieginice@gmail.com";
+const formSubmitEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(contactEmail)}`;
+
 const emojiRegex = /\p{Extended_Pictographic}|\uFE0F/gu;
 
 function select(id) {
@@ -501,13 +504,7 @@ function setupHelpModal() {
     }
   });
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (status) {
-      status.textContent = "Dziękujemy. Zgłoszenie zostało zapisane lokalnie na stronie demonstracyjnej.";
-    }
-    form.reset();
-  });
+  if (status) status.textContent = "";
 }
 
 function toGoogleCalendarUrl(eventData) {
@@ -606,31 +603,158 @@ function renderAchievements() {
   `).join("");
 }
 
+function setFormStatus(statusElement, message) {
+  if (!statusElement) return;
+  statusElement.textContent = message;
+}
+
+async function sendFormEmail(payload) {
+  if (window.location.protocol === "file:") {
+    throw new Error("FORMSUBMIT_REQUIRES_WEBSERVER");
+  }
+
+  const response = await fetch(formSubmitEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Email request failed with status ${response.status}`);
+  }
+
+  const result = await response.json();
+  const isSuccess = result && (result.success === "true" || result.success === true);
+  if (!isSuccess) {
+    throw new Error("Email service returned unsuccessful result");
+  }
+}
+
+function openMailClientFallback(payload) {
+  const subject = String(payload._subject || "Wiadomość ze strony KGW");
+  const body = Object.entries(payload)
+    .filter(([key]) => !key.startsWith("_"))
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("\n");
+
+  const params = new URLSearchParams({
+    subject,
+    body
+  });
+
+  window.location.href = `mailto:${contactEmail}?${params.toString()}`;
+}
+
 function setupForms() {
   const joinForm = select("join-form");
   const joinStatus = select("join-status");
   const contactForm = select("contact-form");
   const contactStatus = select("contact-status");
+  const helpForm = select("help-form");
+  const helpStatus = select("help-status");
 
-  if (joinForm) {
-    joinForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      if (joinStatus) {
-        joinStatus.textContent = "Dziękujemy za zgłoszenie. Skontaktujemy się z Tobą.";
-      }
-      joinForm.reset();
-    });
-  }
+  const submitForm = async (options) => {
+    const { form, statusElement, payloadBuilder, successMessage } = options;
+    if (!(form instanceof HTMLFormElement)) return;
 
-  if (contactForm) {
-    contactForm.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (contactStatus) {
-        contactStatus.textContent = "Wiadomość została zapisana lokalnie na stronie demonstracyjnej.";
+      const submitButton = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
+
+      setFormStatus(statusElement, "Wysyłanie...");
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
       }
-      contactForm.reset();
+
+      try {
+        const payload = payloadBuilder(formData);
+        await sendFormEmail(payload);
+        setFormStatus(statusElement, successMessage);
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        if (error instanceof Error && error.message === "FORMSUBMIT_REQUIRES_WEBSERVER") {
+          const payload = payloadBuilder(formData);
+          openMailClientFallback(payload);
+          setFormStatus(statusElement, "Otwarto program pocztowy z gotową wiadomością. Wyślij mail, aby dokończyć zgłoszenie.");
+        } else {
+          setFormStatus(statusElement, "Nie udało się wysłać formularza. Spróbuj ponownie za chwilę.");
+        }
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
     });
-  }
+  };
+
+  submitForm({
+    form: joinForm,
+    statusElement: joinStatus,
+    successMessage: "Dziękujemy za zgłoszenie. Wiadomość została wysłana.",
+    payloadBuilder: (formData) => {
+      const fullName = String(formData.get("fullname") || "").trim();
+      const contact = String(formData.get("contact") || "").trim();
+      const together = String(formData.get("together") || "").trim();
+      const change = String(formData.get("change") || "").trim();
+      const skills = formData.getAll("joinSkill").map((value) => String(value));
+
+      return {
+        _subject: "KGW: nowy formularz Dołącz",
+        _captcha: "false",
+        formularz: "Dołącz do nas",
+        imie_i_nazwisko: fullName,
+        kontakt: contact,
+        kompetencje: skills.length ? skills.join(", ") : "brak",
+        co_chce_robic: together,
+        co_chce_zmienic: change
+      };
+    }
+  });
+
+  submitForm({
+    form: contactForm,
+    statusElement: contactStatus,
+    successMessage: "Dziękujemy. Wiadomość została wysłana.",
+    payloadBuilder: (formData) => {
+      const name = String(formData.get("name") || "").trim();
+      const contact = String(formData.get("contact") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+
+      return {
+        _subject: "KGW: nowa wiadomość kontaktowa",
+        _captcha: "false",
+        formularz: "Kontakt",
+        imie_i_nazwisko: name,
+        kontakt: contact,
+        wiadomosc: message
+      };
+    }
+  });
+
+  submitForm({
+    form: helpForm,
+    statusElement: helpStatus,
+    successMessage: "Dziękujemy. Zapytanie o pomoc zostało wysłane.",
+    payloadBuilder: (formData) => {
+      const needDescription = String(formData.get("needDescription") || "").trim();
+      const contact = String(formData.get("contact") || "").trim();
+      const needs = formData.getAll("helpNeed").map((value) => String(value));
+
+      return {
+        _subject: "KGW: nowe zapytanie o pomoc",
+        _captcha: "false",
+        formularz: "Szukam pomocy",
+        potrzeby: needs.length ? needs.join(", ") : "brak",
+        opis_potrzeby: needDescription,
+        kontakt: contact
+      };
+    }
+  });
 }
 
 function setupJoinFormReveal() {

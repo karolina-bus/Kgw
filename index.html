@@ -26,10 +26,10 @@
         </button>
         <nav id="main-menu" class="main-menu" aria-label="Menu główne">
           <a href="#o-nas">O nas</a>
+          <a href="#o-projekcie">O projekcie</a>
           <a href="#kompetencje-katalog">Nasze kompetencje</a>
           <a href="#dla-mieszkancow">Dla mieszkańców</a>
           <a href="#harmonogram">Harmonogram działań</a>
-          <a href="#osiagniecia">Nasze osiągnięcia</a>
           <a href="#dolacz">Dołącz do nas</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
@@ -96,6 +96,52 @@
         <article class="card split-card"><h3><span class="ms">emoji_objects</span>Sprawczość</h3><p>Pomysł ma wartość wtedy, kiedy próbujemy go zrealizować.</p></article>
         <article class="card split-card"><h3><span class="ms">sentiment_satisfied</span>Radość</h3><p>Chcemy działać i dobrze się razem bawić.</p></article>
         <article class="card split-card"><h3><span class="ms">home</span>Lokalność</h3><p>Księginice są naszym miejscem i chcemy mieć wpływ na to, jak się tutaj żyje.</p></article>
+      </div>
+    </section>
+
+    <section id="o-projekcie" class="panel panel--project">
+      <div class="project-layout">
+        <article class="project-main">
+          <p class="project-kicker">O projekcie</p>
+          <h2>Działamy, uczymy się i tworzymy razem</h2>
+          <p>
+            Bierzemy udział w projekcie „KGW w Księginicach – tworzymy model organizacji pracy i współpracy KGW–mieszkańcy z wykorzystaniem mapy kompetencji, systemu ról i planowania działań”.
+          </p>
+          <p>
+            Celem projektu jest rozwijanie naszego KGW poprzez lepsze poznanie kompetencji i potencjału jego członków, uporządkowanie ról oraz wspólne planowanie działań. Chcemy również stworzyć model współpracy, który pozwoli nam jeszcze lepiej odpowiadać na potrzeby mieszkańców Księginic.
+          </p>
+          <p>
+            Jednym z efektów projektu jest ta strona, na której pokazujemy, w jaki sposób możemy wykorzystać nasz potencjał i przyczynić się do rozwoju, wrostu oraz posługi dla naszej lokalnej społeczności.
+          </p>
+        </article>
+
+        <aside class="project-meta card" aria-label="Informacje projektowe">
+
+          <article class="project-meta-item">
+            <h3>WSPÓŁFINANSOWANIE</h3>
+            <p>Zadanie publiczne współfinansowane ze środków NIW-CRSO</p>
+          </article>
+          <article class="project-meta-item">
+            <h3>OPERATOR PROGRAMU</h3>
+            <p>Zadanie realizowane przez Stowarzyszenie Odra-Niemen jako operatora programu</p>
+          </article>
+          <article class="project-meta-item">
+            <h3>REALIZATOR</h3>
+            <p>Koło Gospodyń Wiejskich w Księginicach</p>
+          </article>
+
+          <article class="project-logo-grid" aria-label="Logotypy partnerów projektu">
+            <div class="project-logo-slot project-logo-slot--filled">
+              <img class="project-logo-image" src="assets/logo-kgw.png" alt="Logo KGW w Księginicach">
+            </div>
+            <div class="project-logo-slot project-logo-slot--filled">
+              <img id="nowe-fio-logo" class="project-logo-image" src="assets/Odra-Niemen-Logo.png" alt="Logotyp Odra Niemen">
+            </div>
+            <div class="project-logo-slot project-logo-slot--filled">
+              <img class="project-logo-image" src="assets/NOWE-FIO_logo.png" alt="Logo NOWE FIO">
+            </div>
+          </article>
+        </aside>
       </div>
     </section>
 
@@ -184,34 +230,6 @@
       </p>
     </section>
 
-
-
-    <section id="harmonogram" class="panel">
-      <h2><span class="ms">calendar_month</span>Harmonogram działań</h2>
-      <div class="calendar-switch">
-        <button class="switch is-active" type="button" data-calendar-view="month">Styczeń | Luty | Marzec...</button>
-        <button class="switch" type="button" data-calendar-view="year"><span class="ms">timeline</span>Harmonogram roczny</button>
-      </div>
-      <div id="calendar-month" class="calendar-view"></div>
-      <div id="calendar-year" class="calendar-view" hidden></div>
-    </section>
-
-    <section id="osiagniecia" class="panel">
-      <h2>Nasze osiągnięcia</h2>
-      <p>To, co już udało nam się zrobić.</p>
-      <div class="stats">
-        <article class="card"><p class="stat__value">15+</p><p class="stat__label">aktywnych osób</p></article>
-        <article class="card"><p class="stat__value">24</p><p class="stat__label">zrealizowane inicjatywy</p></article>
-        <article class="card"><p class="stat__value">480+</p><p class="stat__label">uczestników wydarzeń</p></article>
-        <article class="card"><p class="stat__value">900+</p><p class="stat__label">godzin wspólnego działania</p></article>
-      </div>
-      <div class="timeline" id="achievements-timeline"></div>
-      <p class="note-plain">
-        Nie tylko nagrody są osiągnięciami. Osiągnięciem jest również to, że ktoś dzięki nam poznał sąsiada,
-        znalazł pomoc, nauczył się czegoś nowego albo po prostu dobrze spędził czas.
-      </p>
-    </section>
-
     <section id="mapa" class="panel">
       <h2><span class="ms">map</span>Nasza mapa Księginic</h2>
       <p>
@@ -241,6 +259,33 @@
         Obszar mapy: Księginice (55-040), gmina Kobierzyce.
       </p>
     </section>
+
+
+    <section id="harmonogram" class="panel">
+      <h2><span class="ms">calendar_month</span>Harmonogram działań</h2>
+      <div class="calendar-switch">
+        <button class="switch is-active" type="button" data-calendar-view="month">Styczeń | Luty | Marzec...</button>
+        <button class="switch" type="button" data-calendar-view="year"><span class="ms">timeline</span>Harmonogram roczny</button>
+      </div>
+      <div id="calendar-month" class="calendar-view"></div>
+      <div id="calendar-year" class="calendar-view" hidden></div>
+    </section>
+
+    <!-- <section id="osiagniecia" class="panel">
+      <h2>Nasze osiągnięcia</h2>
+      <p>To, co już udało nam się zrobić.</p>
+      <div class="stats">
+        <article class="card"><p class="stat__value">15+</p><p class="stat__label">aktywnych osób</p></article>
+        <article class="card"><p class="stat__value">24</p><p class="stat__label">zrealizowane inicjatywy</p></article>
+        <article class="card"><p class="stat__value">480+</p><p class="stat__label">uczestników wydarzeń</p></article>
+        <article class="card"><p class="stat__value">900+</p><p class="stat__label">godzin wspólnego działania</p></article>
+      </div>
+      <div class="timeline" id="achievements-timeline"></div>
+      <p class="note-plain">
+        Nie tylko nagrody są osiągnięciami. Osiągnięciem jest również to, że ktoś dzięki nam poznał sąsiada,
+        znalazł pomoc, nauczył się czegoś nowego albo po prostu dobrze spędził czas.
+      </p>
+    </section> -->
 
     <section id="dolacz" class="panel panel--join">
       <h2>Dołącz do nas</h2>
@@ -281,10 +326,9 @@
       <p>Masz pytanie? Pomysł? Chcesz do nas dołączyć? Potrzebujesz pomocy? Napisz. Chętnie Cię poznamy.</p>
       <div class="contact-grid">
         <article class="card split-card">
-          <p><strong><span class="ms">mail</span>E-mail</strong><br><a href="mailto:kgw@ksieginice.pl">kgw@ksieginice.pl</a></p>
-          <p><strong><span class="ms">call</span>Telefon</strong><br><a href="tel:+48000000000">+48 000 000 000</a></p>
-          <p><strong><span class="ms">share</span>Media społecznościowe</strong><br>Facebook | Instagram</p>
-          <p><strong><span class="ms">location_on</span>Spotykamy się</strong><br>Sala spotkań, Księginice</p>
+          <p><strong><span class="ms">mail</span>E-mail</strong><br><a href="mailto:kgw.ksieginice@gmail.com">kgw.ksieginice@gmail.com</a></p>
+          <p><strong><span class="ms">call</span>Telefon</strong><br><a href="tel:+48887652423">+48 887 652 423</a></p>
+          <p><strong><span class="ms">share</span>Media społecznościowe</strong><br><a href="https://www.facebook.com/share/1D9Uy9dy3q/" target="_blank" rel="noopener noreferrer">Facebook</a></p>
         </article>
         <form id="contact-form" class="card form">
           <label>Imię i nazwisko<input name="name" required></label>
